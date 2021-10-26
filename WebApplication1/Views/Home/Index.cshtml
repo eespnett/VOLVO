@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "CRUD of Trucks";
+}
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+ 
+<div class="row">
+    <div class="col-md-3">
+        <h2>CRUD of  Trucks</h2>
+        Application Create, Read, Update and Delete Trucks
+    </div>
+    <div class="col-md-12">
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Model</th>
+                <th>Factory Year</th>
+                <th>Model Year</th>
+                <th>Action</th>
+            </tr>
+
+            @if (ViewData["retornoTrucks"] != null)
+            {
+                List<WebApplication1.Models.Entities.EntityTruck> myList = (List<WebApplication1.Models.Entities.EntityTruck>)ViewData["retornoTrucks"];
+
+                foreach (var item in myList)
+                {
+                    <tr>
+                        <td>@item.Id.ToString()</td>
+                        <td>@item.Model.Id - @item.Model.model.ToString() </td>
+                        <td>@item.FactoryYear.ToString()</td>
+                        <td>@item.ModelYear.ToString()</td>
+                        <td>
+                            @Html.ActionLink("Delete", "TruckDelete", "Home", new { idTruck = item.Id })
+                            @Html.ActionLink("Change", "TruckChange", "Home", new { idTruck = item.Id })
+                        </td>
+                    </tr>
+                }
+            }
+
+
+        </table>
+
+    </div>
+  
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+        <br />
+        @Html.ActionLink("Create", "TruckCreate", "Home")
+
+    </div>
+   
+    </div>
